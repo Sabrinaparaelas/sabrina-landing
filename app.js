@@ -265,3 +265,26 @@ function applyPhoneMask() {
         e.target.value = value;
     });
 }
+<!-- Cole este script ao final do seu app.js ou antes de </body> -->
+<script>
+// Lightbox pura para galeria
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.gallery-img').forEach(function(img){
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', function() {
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      overlay.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+      document.body.appendChild(overlay);
+      overlay.addEventListener('click', function() {
+        document.body.removeChild(overlay);
+      });
+      overlay.tabIndex = -1;
+      overlay.focus();
+      overlay.onkeydown = function(e){
+        if(e.key === "Escape") overlay.click();
+      };
+    });
+  });
+});
+</script>
