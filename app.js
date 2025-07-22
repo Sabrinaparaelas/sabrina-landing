@@ -47,22 +47,22 @@ function initContactForm() {
         
         // Validation
         if (!nome || !whatsapp || !email) {
-            alert('Por favor, preencha todos os campos obrigatÃ³rios.');
+            alert('Por favor, preencha todos os campos obrigatórios.');
             return;
         }
         
         if (!validateEmail(email)) {
-            alert('Por favor, insira um e-mail vÃ¡lido.');
+            alert('Por favor, insira um e-mail válido.');
             return;
         }
         
         if (!validatePhone(whatsapp)) {
-            alert('Por favor, insira um WhatsApp vÃ¡lido.');
+            alert('Por favor, insira um WhatsApp válido.');
             return;
         }
         
         // Create WhatsApp message
-        let message = `OlÃ¡! Gostaria de agendar uma sessÃ£o de planejamento.\n\n`;
+        let message = `Olá! Gostaria de agendar uma sessão de planejamento.`;
         message += `*Nome:* ${nome}\n`;
         message += `*WhatsApp:* ${whatsapp}\n`;
         message += `*E-mail:* ${email}\n`;
@@ -77,16 +77,16 @@ function initContactForm() {
         }
         
         if (observacoes) {
-            message += `*ObservaÃ§Ãµes:* ${observacoes}\n`;
+            message += `*Observações:* ${observacoes}\n`;
         }
         
-        message += `\nEspero retorno para agendarmos! ðŸ˜Š`;
+        message += `\Espero retorno para agendarmos!`;
         
         // Encode message for URL
         const encodedMessage = encodeURIComponent(message);
         
         // WhatsApp URL
-        const whatsappURL = `https://wa.me/5511999999999?text=${encodedMessage}`;
+        const whatsappURL = `https://wa.me/5511969529607?text=${encodedMessage}`;
         
         // Show success message
         showSuccessMessage();
