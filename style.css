@@ -966,11 +966,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .placeholder-img::after {
-  content: '📸 Foto da Fotógrafa';
+  content: 'ðŸ“¸ Foto da FotÃ³grafa';
 }
 
 .photographer-img::after {
-  content: '📸 Sabrina - Fotógrafa';
+  content: 'ðŸ“¸ Sabrina - FotÃ³grafa';
 }
 
 .gallery-img {
@@ -978,7 +978,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .gallery-img::after {
-  content: '📸 Ensaio Feminino';
+  content: 'ðŸ“¸ Ensaio Feminino';
 }
 
 .about-text h2 {
