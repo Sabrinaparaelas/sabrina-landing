@@ -288,3 +288,42 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+document.addEventListener('DOMContentLoaded', function() {
+  const track = document.querySelector('.carousel-track');
+  const slides = Array.from(track.children);
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  let currentIndex = 0;
+
+  function updateCarousel() {
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === 0) ? slides.length - 1 : currentIndex - 1;
+    updateCarousel();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = (currentIndex === slides.length - 1) ? 0 : currentIndex + 1;
+    updateCarousel();
+  });
+
+  // Touch/swipe suporte mobile:
+  let startX = null;
+  track.addEventListener('touchstart', function(e){
+    startX = e.touches[0].clientX;
+  });
+  track.addEventListener('touchend', function(e){
+    if (startX === null) return;
+    const endX = e.changedTouches[0].clientX;
+    if (startX - endX > 40) nextBtn.click();
+    else if (endX - startX > 40) prevBtn.click();
+    startX = null;
+  });
+
+  // Inicializa com o primeiro slide centralizado
+  updateCarousel();
+  window.addEventListener('resize', updateCarousel);
+});
