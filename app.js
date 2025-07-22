@@ -71,7 +71,7 @@ function initContactForm() {
             'empresarial': 'Ensaio Empresarial - R$ 450'
         };
 
-        let message = `Olá! Gostaria de agendar uma sessão de planejamento 💖\n\n`;
+        let message = `Olá! Gostaria de agendar uma sessão de planejamento 😍\n\n`;
         message += `*Nome:* ${nome}\n`;
         message += `*WhatsApp:* ${whatsapp}\n`;
         message += `*E-mail:* ${email}\n`;
