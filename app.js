@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCountdown();
     initSmoothScroll();
     initNavbar();
+    applyPhoneMask();
 });
 
 // FAQ Accordion functionality
@@ -62,27 +63,27 @@ function initContactForm() {
         }
         
         // Create WhatsApp message with correct packages
-        let message = `Olá! Gostaria de agendar uma sessão de planejamento.\n\n`;
+        const pacoteText = {
+            'slim': 'Pacote Slim - R$ 570',
+            'admirase': 'Pacote Admira-se - R$ 770',
+            'gestante': 'Ensaio Sensual Gestante - R$ 470',
+            'aniversario': 'Ensaio de Aniversário - R$ 570',
+            'empresarial': 'Ensaio Empresarial - R$ 450'
+        };
+
+        let message = `Olá! Gostaria de agendar uma sessão de planejamento 💖\n\n`;
         message += `*Nome:* ${nome}\n`;
         message += `*WhatsApp:* ${whatsapp}\n`;
         message += `*E-mail:* ${email}\n`;
-        
-        if (pacote) {
-            const pacoteText = {
-                'slim': 'Pacote Slim - R$ 570',
-                'admirase': 'Pacote Admira-se - R$ 770',
-                'gestante': 'Ensaio Sensual Gestante - R$ 470',
-                'aniversario': 'Ensaio de Aniversário - R$ 570',
-                'empresarial': 'Ensaio Empresarial - R$ 450'
-            };
+        if (pacote && pacoteText[pacote]) {
             message += `*Pacote de interesse:* ${pacoteText[pacote]}\n`;
+        } else {
+            message += `*Pacote de interesse:* Não selecionado\n`;
         }
-        
         if (observacoes) {
             message += `*Observações:* ${observacoes}\n`;
         }
-        
-        message += `\nEspero retorno para agendarmos! 😊`;
+        message += `\nEspero retorno para agendarmos! ✨`;
         
         // Encode message for URL
         const encodedMessage = encodeURIComponent(message);
@@ -144,6 +145,9 @@ function showSuccessMessage() {
     const form = document.getElementById('contactForm');
     if (!form) return;
     
+    const existingMsg = document.querySelector('.success-message');
+    if (existingMsg) existingMsg.remove();
+    
     const successDiv = document.createElement('div');
     successDiv.className = 'success-message';
     successDiv.innerHTML = `
@@ -155,7 +159,7 @@ function showSuccessMessage() {
     
     form.appendChild(successDiv);
     
-    // Remove success message after redirect
+    // Remove success message after 3 seconds
     setTimeout(() => {
         if (successDiv.parentNode) {
             successDiv.parentNode.removeChild(successDiv);
@@ -177,7 +181,6 @@ function initCountdown() {
         const distance = targetDate.getTime() - now;
         
         if (distance < 0) {
-            // Reset to next week if countdown expires
             targetDate.setDate(targetDate.getDate() + 7);
             return;
         }
@@ -187,7 +190,6 @@ function initCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        // Update DOM elements
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
@@ -199,7 +201,6 @@ function initCountdown() {
         if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
     }
     
-    // Update countdown every second
     updateCountdown();
     setInterval(updateCountdown, 1000);
 }
@@ -216,7 +217,7 @@ function initSmoothScroll() {
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
-                const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar
+                const offsetTop = targetElement.offsetTop - 80;
                 
                 window.scrollTo({
                     top: offsetTop,
@@ -241,57 +242,7 @@ function initNavbar() {
     });
 }
 
-// WhatsApp direct contact
-function contatoWhatsApp() {
-    const message = encodeURIComponent('Olá! Gostaria de saber mais sobre os ensaios femininos. Podemos conversar?');
-    window.open(`https://wa.me/5511969529607?text=${message}`, '_blank');
-}
-
-// Gallery lightbox functionality (optional enhancement)
-function initGalleryLightbox() {
-    const galleryItems = document.querySelectorAll('.gallery-item img');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            // Simple lightbox implementation
-            const lightbox = document.createElement('div');
-            lightbox.className = 'lightbox';
-            lightbox.innerHTML = `
-                <div class="lightbox-content">
-                    <span class="lightbox-close">&times;</span>
-                    <img src="${this.src}" alt="${this.alt}">
-                </div>
-            `;
-            
-            document.body.appendChild(lightbox);
-            
-            // Close lightbox
-            lightbox.querySelector('.lightbox-close').addEventListener('click', function() {
-                document.body.removeChild(lightbox);
-            });
-            
-            lightbox.addEventListener('click', function(e) {
-                if (e.target === lightbox) {
-                    document.body.removeChild(lightbox);
-                }
-            });
-        });
-    });
-}
-
-// Mobile menu toggle
-function initMobileMenu() {
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    
-    if (mobileToggle && navLinks) {
-        mobileToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('mobile-active');
-        });
-    }
-}
-
-// Form input mask for phone
+// Phone input mask (Brazilian format)
 function applyPhoneMask() {
     const phoneInput = document.getElementById('whatsapp');
     if (!phoneInput) return;
@@ -301,54 +252,16 @@ function applyPhoneMask() {
         
         if (value.length <= 11) {
             if (value.length <= 10) {
-                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+                value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, function(_, p1, p2, p3) {
+                    return `(${p1}) ${p2}${p3 ? '-' + p3 : ''}`;
+                });
             } else {
-                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, function(_, p1, p2, p3) {
+                    return `(${p1}) ${p2}${p3 ? '-' + p3 : ''}`;
+                });
             }
         }
         
         e.target.value = value;
     });
 }
-
-// Initialize phone mask when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    applyPhoneMask();
-});
-
-// Utility function to format currency
-function formatCurrency(value) {
-    return new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-    }).format(value);
-}
-
-// Analytics tracking (optional)
-function trackEvent(action, category, label) {
-    if (typeof gtag !== 'undefined') {
-        gtag('event', action, {
-            event_category: category,
-            event_label: label
-        });
-    }
-}
-
-// Track form submissions
-document.addEventListener('DOMContentLoaded', function() {
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function() {
-            trackEvent('form_submit', 'contact', 'lead_generation');
-        });
-    }
-    
-    // Track package button clicks
-    const packageButtons = document.querySelectorAll('[onclick*="agendar"]');
-    packageButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const packageName = this.textContent.trim();
-            trackEvent('package_click', 'conversion', packageName);
-        });
-    });
-});
