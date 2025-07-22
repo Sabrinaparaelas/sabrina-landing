@@ -1013,12 +1013,30 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
   transition: transform var(--duration-normal);
+  /* Ajuste chave: proporção vertical para garantir mesmo tamanho em todas */
+  aspect-ratio: 4 / 5; /* ou 3/4 para ainda mais verticalidade */
+  background: #eee;
+  display: flex; 
+  align-items: stretch;
+  justify-content: stretch;
 }
 
-.gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
+/* COLAR ESSE TRECHO ABAIXO */
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  /* Força a foto a preencher 100% do card, mesmo cortando, sem deformar */
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s;
+  border-radius: 0; /* Remove arredondamento duplicado da imagem, fica só do card */
 }
+
+.gallery-item:hover .gallery-img {
+  transform: scale(1.04);
+}
+
 
 /* Testimonials */
 .testimonials {
