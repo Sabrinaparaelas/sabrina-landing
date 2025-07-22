@@ -976,14 +976,18 @@ h1, h2, h3, h4, h5, h6 {
 .gallery-img::after {
   content: '📸 Ensaio Feminino';
 }
-/* Ajuste específico da imagem da fotógrafa na About */
+/* About Section - Foto da Fotógrafa */
 .about-image img.photographer-img {
   width: 100%;
-  height: 400px;
+  max-width: 340px;
+  height: 360px;
   object-fit: cover;
   border-radius: var(--radius-lg);
   display: block;
+  margin: 0 auto;
+  box-shadow: 0 4px 16px rgba(44,44,44,0.09);
 }
+
 .about-text h2 {
   font-size: var(--font-size-3xl);
   margin-bottom: var(--space-24);
@@ -1004,27 +1008,19 @@ h1, h2, h3, h4, h5, h6 {
 
 <!-- Cole este CSS no style.css logo após o bloco da galeria -->
 <style>
+/* Galeria - Fotos menores e proporcionais */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Deixa os cards menores */
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .gallery-item {
-  max-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  aspect-ratio: 4/5;
+  max-width: 190px;
+  margin: 0 auto;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(44,44,44,0.07);
@@ -1036,18 +1032,21 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform 0.25s;
 }
 
+.gallery-item:hover {
+  transform: translateY(-6px) scale(1.018);
+  box-shadow: 0 10px 24px rgba(44,44,44,0.14);
+}
+
 .gallery-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
   display: block;
   border-radius: 0;
   transition: transform 0.3s;
 }
 
-
-/* Lightbox Overlay (abre imagem ampliada ao clicar) */
+/* Lightbox overlay segue igual */
 .lightbox-overlay {
   position: fixed;
   z-index: 2000;
@@ -1065,7 +1064,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 32px rgba(0,0,0,.3);
   background: #fff;
 }
-
 
 /* Testimonials */
 .testimonials {
