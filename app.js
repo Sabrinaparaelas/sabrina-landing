@@ -86,7 +86,7 @@ function initContactForm() {
         const encodedMessage = encodeURIComponent(message);
         
         // WhatsApp URL
-        const whatsappURL = `https://wa.me/5511999999999?text=${encodedMessage}`;
+        const whatsappURL = `https://wa.me/5511969529607text=${encodedMessage}`;
         
         // Show success message
         showSuccessMessage();
