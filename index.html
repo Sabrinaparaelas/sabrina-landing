@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <meta charset="UTF-8">
     <link rel="icon" href="favicon-32x32.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,23 +13,30 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-content">
-                <div class="logo">Sabrina Para Elas</div>
-                <div class="nav-links">
-                    <a href="#inicio">Início</a>
-                    <a href="#sobre">Sobre</a>
-                    <a href="#galeria">Galeria</a>
-                    <a href="#pacotes">Pacotes</a>
-                    <a href="#contato">Contato</a>
-                </div>
-                <div class="nav-cta">
-                    <a href="https://wa.me/5511969529607?text=Olá! Gostaria de agendar meu ensaio feminino." class="btn">Agendar</a>
-                </div>
-            </div>
+<nav class="navbar">
+    <div class="container nav-content">
+        <div class="logo">Sabrina Para Elas</div>
+        <div class="nav-links">
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#galeria">Galeria</a>
+            <a href="#pacotes">Pacotes</a>
+            <a href="#contato">Contato</a>
         </div>
-    </nav>
+        <div class="social-nav">
+            <a href="https://www.instagram.com/sabrina.paraelas/" target="_blank" class="social-icon">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100083660640112&locale=pt_BR" target="_blank" class="social-icon">
+                <i class="fab fa-facebook"></i>
+            </a>
+        </div>
+        <div class="nav-cta">
+            <a href="#contato" class="btn btn--primary">Agende Seu Ensaio</a>
+        </div>
+    </div>
+</nav>
+
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
@@ -82,32 +91,44 @@
         </div>
     </section>
 
-    <!-- Gallery Section Completa com Lightbox e CSS Orientado -->
-    <section id="galeria" class="gallery">
-  <div class="container">
-    <h2 class="section-title">Nossos Ensaios Femininos</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="foto (6).jpg" alt="Mulher deitada usando lingerie clara, pose sensual em estúdio" class="gallery-img">
-      </div>
-      <div class="gallery-item">
-        <img src="foto (16).jpg" alt="Sessão boudoir com luvas brancas e expressão delicada" class="gallery-img">
-      </div>
-      <div class="gallery-item">
-        <img src="foto (27).jpg" alt="Mulher de lingerie vermelha deitada em pose introspectiva" class="gallery-img">
-      </div>
-      <div class="gallery-item">
-        <img src="foto (37).jpg" alt="Ensaio feminino preto e branco, mulher se olhando no espelho" class="gallery-img">
-      </div>
-      <div class="gallery-item">
-        <img src="foto (60).jpg" alt="Mulher sorrindo abraçando os ombros, expressão feliz em close" class="gallery-img">
-      </div>
-      <div class="gallery-item">
-        <img src="IMG_0069.jpg" alt="Pose ousada de mulher na janela com body preto" class="gallery-img">
-      </div>
+    <!-- Gallery Carousel -->
+<section id="galeria" class="gallery-carousel-section">
+    <div class="container">
+        <h2 class="section-title">Nossos Ensaios Femininos</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn prev" aria-label="Anterior">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="carousel-track-container">
+                <div class="carousel-track">
+                    <div class="carousel-slide">
+                        <img src="foto (6).jpg" alt="Mulher deitada usando lingerie clara, pose sensual em estúdio" class="carousel-img">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="foto (16).jpg" alt="Sessão boudoir com luvas brancas e expressão delicada" class="carousel-img">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="foto (27).jpg" alt="Mulher de lingerie vermelha deitada em pose introspectiva" class="carousel-img">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="foto (37).jpg" alt="Ensaio feminino preto e branco, mulher se olhando no espelho" class="carousel-img">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="foto (60).jpg" alt="Mulher sorrindo abraçando os ombros, expressão feliz em close" class="carousel-img">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="IMG_0069.jpg" alt="Pose ousada de mulher na janela with body preto" class="carousel-img">
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn next" aria-label="Próximo">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="carousel-indicators"></div>
     </div>
-  </div>
 </section>
+
 
 
 
@@ -425,12 +446,12 @@
         </div>
     </footer>
 
-    <!-- WhatsApp Float Button -->
-    <div class="whatsapp-float">
-        <a href="https://wa.me/5511969529607?text=Olá! Gostaria de agendar meu ensaio feminino.">
-            <span class="whatsapp-icon">💬</span>
-        </a>
-    </div>
+    <!-- WhatsApp Floating Button -->
+<div class="whatsapp-float">
+    <a href="https://wa.me/5511969529607?text=Olá! Gostaria de saber mais sobre os ensaios femininos 💖" target="_blank" class="whatsapp-btn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</div>
 
     <script src="app.js"></script>
 </body>

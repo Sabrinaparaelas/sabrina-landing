@@ -327,3 +327,109 @@ document.addEventListener('DOMContentLoaded', function() {
   updateCarousel();
   window.addEventListener('resize', updateCarousel);
 });
+// Carousel functionality
+function initCarousel() {
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    const nextButton = document.querySelector('.carousel-btn.next');
+    const prevButton = document.querySelector('.carousel-btn.prev');
+    const indicatorsContainer = document.querySelector('.carousel-indicators');
+    
+    if (!track || !slides.length) return;
+    
+    let currentSlide = 0;
+    
+    // Create indicators
+    slides.forEach((_, index) => {
+        const indicator = document.createElement('button');
+        indicator.className = 'carousel-indicator';
+        if (index === 0) indicator.classList.add('active');
+        indicator.addEventListener('click', () => moveToSlide(index));
+        indicatorsContainer.appendChild(indicator);
+    });
+    
+    const indicators = Array.from(indicatorsContainer.children);
+    
+    // Move to slide function
+    function moveToSlide(targetIndex) {
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        track.style.transform = `translateX(-${targetIndex * slideWidth}px)`;
+        
+        // Update indicators
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === targetIndex);
+        });
+        
+        currentSlide = targetIndex;
+    }
+    
+    // Next button
+    nextButton.addEventListener('click', () => {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        moveToSlide(nextIndex);
+    });
+    
+    // Previous button
+    prevButton.addEventListener('click', () => {
+        const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        moveToSlide(prevIndex);
+    });
+    
+    // Auto-play (opcional)
+    setInterval(() => {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        moveToSlide(nextIndex);
+    }, 5000);
+    
+    // Touch support for mobile
+    let startX = null;
+    
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
+    
+    track.addEventListener('touchend', (e) => {
+        if (startX === null) return;
+        
+        const endX = e.changedTouches[0].clientX;
+        const diff = startX - endX;
+        
+        if (Math.abs(diff) > 50) { // Minimum swipe distance
+            if (diff > 0) {
+                nextButton.click();
+            } else {
+                prevButton.click();
+            }
+        }
+        
+        startX = null;
+    });
+    
+    // Lightbox functionality
+    slides.forEach(slide => {
+        const img = slide.querySelector('.carousel-img');
+        img.addEventListener('click', () => {
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox-overlay';
+            lightbox.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+            document.body.appendChild(lightbox);
+            
+            lightbox.addEventListener('click', () => {
+                document.body.removeChild(lightbox);
+            });
+        });
+    });
+}
+
+// Update your DOMContentLoaded to include carousel
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all components
+    initFAQ();
+    initContactForm();
+    initCountdown();
+    initSmoothScroll();
+    initNavbar();
+    initCarousel(); // Add this line
+    applyPhoneMask();
+});
+
