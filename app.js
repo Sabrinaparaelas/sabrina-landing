@@ -47,22 +47,22 @@ function initContactForm() {
         
         // Validation
         if (!nome || !whatsapp || !email) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
+            alert('Por favor, preencha todos os campos obrigatÃ³rios.');
             return;
         }
         
         if (!validateEmail(email)) {
-            alert('Por favor, insira um e-mail válido.');
+            alert('Por favor, insira um e-mail vÃ¡lido.');
             return;
         }
         
         if (!validatePhone(whatsapp)) {
-            alert('Por favor, insira um WhatsApp válido.');
+            alert('Por favor, insira um WhatsApp vÃ¡lido.');
             return;
         }
         
         // Create WhatsApp message
-        let message = `Olá! Gostaria de agendar uma sessão de planejamento.\n\n`;
+        let message = `OlÃ¡! Gostaria de agendar uma sessÃ£o de planejamento.\n\n`;
         message += `*Nome:* ${nome}\n`;
         message += `*WhatsApp:* ${whatsapp}\n`;
         message += `*E-mail:* ${email}\n`;
@@ -77,16 +77,16 @@ function initContactForm() {
         }
         
         if (observacoes) {
-            message += `*Observações:* ${observacoes}\n`;
+            message += `*ObservaÃ§Ãµes:* ${observacoes}\n`;
         }
         
-        message += `\nEspero retorno para agendarmos! 😊`;
+        message += `\nEspero retorno para agendarmos! ðŸ˜Š`;
         
         // Encode message for URL
         const encodedMessage = encodeURIComponent(message);
         
         // WhatsApp URL
-        const whatsappURL = `https://wa.me/5511969529607text=${encodedMessage}`;
+        const whatsappURL = `https://wa.me/5511999999999?text=${encodedMessage}`;
         
         // Show success message
         showSuccessMessage();
@@ -118,7 +118,7 @@ function showSuccessMessage() {
     successDiv.className = 'success-message';
     successDiv.innerHTML = `
         <div style="background: #d4edda; color: #155724; padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-            ✅ Dados enviados com sucesso! Você será redirecionada para o WhatsApp em instantes.
+            âœ… Dados enviados com sucesso! VocÃª serÃ¡ redirecionada para o WhatsApp em instantes.
         </div>
     `;
     
@@ -368,7 +368,7 @@ function handleFormError(error) {
     errorDiv.className = 'error-message';
     errorDiv.innerHTML = `
         <div style="background: #f8d7da; color: #721c24; padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
-            ❌ Ocorreu um erro. Por favor, tente novamente ou entre em contato via WhatsApp.
+            âŒ Ocorreu um erro. Por favor, tente novamente ou entre em contato via WhatsApp.
         </div>
     `;
     
